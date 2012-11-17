@@ -9,7 +9,13 @@ namespace ProgTek_WebCrawler
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello world!");
+            RSSreader reader = new RSSreader("http://www.vg.no/rss/create.php");
+            List<News> list = reader.NewsList;
+            foreach (News news in list)
+            {
+                Console.WriteLine(news.ToString());
+                Console.WriteLine();
+            }
             Console.ReadKey();
         }
     }
