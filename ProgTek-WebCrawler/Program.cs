@@ -16,7 +16,13 @@ namespace ProgTek_WebCrawler
                 Console.WriteLine(news.ToString());
                 Console.WriteLine();
             }
+
+            OracleHandler test = new OracleHandler();
+            test.testConnection();
+
             Console.ReadKey();
+
+            
         }
     }
 }

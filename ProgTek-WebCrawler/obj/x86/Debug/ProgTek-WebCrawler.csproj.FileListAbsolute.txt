@@ -5,3 +5,4 @@ c:\users\arne\documents\visual studio 2010\Projects\ProgTek-WebCrawler\ProgTek-W
 c:\users\arne\documents\visual studio 2010\Projects\ProgTek-WebCrawler\ProgTek-WebCrawler\obj\x86\Debug\ProgTek-WebCrawler.pdb
 C:\Users\Jakob\Documents\GitHub\ProgTek-WebCrawler\ProgTek-WebCrawler\obj\x86\Debug\ProgTek-WebCrawler.exe
 C:\Users\Jakob\Documents\GitHub\ProgTek-WebCrawler\ProgTek-WebCrawler\obj\x86\Debug\ProgTek-WebCrawler.pdb
+C:\Users\Arne\Documents\Visual Studio 2010\Projects\ProgTek-WebCrawler\ProgTek-WebCrawler\bin\Debug\Oracle.DataAccess.dll
