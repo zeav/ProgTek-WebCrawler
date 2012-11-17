@@ -3,3 +3,5 @@ c:\users\arne\documents\visual studio 2010\Projects\ProgTek-WebCrawler\ProgTek-W
 c:\users\arne\documents\visual studio 2010\Projects\ProgTek-WebCrawler\ProgTek-WebCrawler\obj\x86\Debug\ResolveAssemblyReference.cache
 c:\users\arne\documents\visual studio 2010\Projects\ProgTek-WebCrawler\ProgTek-WebCrawler\obj\x86\Debug\ProgTek-WebCrawler.exe
 c:\users\arne\documents\visual studio 2010\Projects\ProgTek-WebCrawler\ProgTek-WebCrawler\obj\x86\Debug\ProgTek-WebCrawler.pdb
+C:\Users\Jakob\Documents\GitHub\ProgTek-WebCrawler\ProgTek-WebCrawler\obj\x86\Debug\ProgTek-WebCrawler.exe
+C:\Users\Jakob\Documents\GitHub\ProgTek-WebCrawler\ProgTek-WebCrawler\obj\x86\Debug\ProgTek-WebCrawler.pdb
