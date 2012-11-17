@@ -49,6 +49,12 @@ namespace ProgTek_WebCrawler
             }
         }
 
+        /// <summary>
+        /// Takes XML input, and gets information between searched object.
+        /// </summary>
+        /// <param name="inputString">Input XML</param>
+        /// <param name="XMLvar">XML variable</param>
+        /// <returns>A single string with the value</returns>
         private string getFirstValueOfXMLvar(string inputString, string XMLvar)
         {
             int varStart = inputString.IndexOf("<" + XMLvar + ">");
