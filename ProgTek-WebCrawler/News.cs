@@ -12,6 +12,8 @@ namespace ProgTek_WebCrawler
         private string description;
         private string date;
         private string category;
+        private string text;
+        private string html;
         /// <summary>
         /// Creates an news object
         /// </summary>
@@ -20,13 +22,16 @@ namespace ProgTek_WebCrawler
         /// <param name="Date">Date of News published</param>
         /// <param name="Category">Category the News belongs to</param>
         /// <param name="Link">The URL the news is located</param>
-        public News(string Title, string Description, string Date, string Category, string Link)
+        /// <param name="Text">The main text associated with the news</param>
+        public News(string Title, string Description, string Date, string Category, string Link, string Text)
         {
             this.title = Title;
             this.description = Description;
             this.date = Date;
             this.category = Category;
             this.link = Link;
+            this.html = Text;
+            this.text = HTMLTagCleaner(Text);
         }
 
         public string Title { get { return title; } }
@@ -34,10 +39,27 @@ namespace ProgTek_WebCrawler
         public string Date { get { return date; } }
         public string Category { get { return category; } }
         public string Link { get { return link; } }
+        public string Text { get { return text; } }
 
         public override string ToString()
         {
-            return ("-News-\r\n") + ("Title: " + Title + "\r\n") + ("Description: " + Description + "\r\n") + ("Date: " + Date + "\r\n") + ("Category: " + Category + "\r\n") + ("Link: " + Link);
+            return ("-News-\r\n") + ("Title: " + Title + "\r\n") + ("Description: " + Description + "\r\n") + ("Date: " + Date + "\r\n") + ("Category: " + Category + "\r\n") + ("Link: " + Link) + ("Text: " + Text);
+        }
+
+        private string HTMLTagCleaner(string input)
+        {
+            int continueSearchPos = 0;
+            //Is ATM kinda uneffective, because it starts at the beginning for each search. Instead of continue to look from where it left off. Will implement soon. FIXED
+            while (true)
+            {
+                int firstPos = input.IndexOf('<', continueSearchPos);
+                if (firstPos < 0) return input;
+                //Implemented to save searching time, so it will continue where it left off without having to search the entire string again.
+                continueSearchPos = firstPos;
+                int secondPos = input.IndexOf('>', firstPos) + 1;
+                //Now split it up, and merge them together without the <>
+                input = input.Substring(0, firstPos) + input.Substring(secondPos);
+            }
         }
     }
 }

@@ -21,8 +21,6 @@ namespace ProgTek_WebCrawler
             test.testConnection();
 
             Console.ReadKey();
-
-            
         }
     }
 }

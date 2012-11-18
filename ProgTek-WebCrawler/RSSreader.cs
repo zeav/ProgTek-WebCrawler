@@ -25,7 +25,8 @@ namespace ProgTek_WebCrawler
                 string date = getFirstValueOfXMLvar(news, "pubDate");
                 string category = getFirstValueOfXMLvar(news, "category");
                 string link = getFirstValueOfXMLvar(news, "link");
-                newsList.Add(new News(title, description, date, category, link));
+                string text = MainTextFetcher(link, "<!-- Article text -->", "<!-- End of \"artikkel_felt\" -->");
+                newsList.Add(new News(title, description, date, category, link, text));
             }
         }
 
@@ -60,6 +61,17 @@ namespace ProgTek_WebCrawler
             int varStart = inputString.IndexOf("<" + XMLvar + ">");
             int varEnd = inputString.IndexOf(@"</" + XMLvar + ">");
             return inputString.Substring(varStart + (XMLvar.Length + 2), varEnd - varStart - (XMLvar.Length + 2));
+        }
+
+        public string MainTextFetcher(string URL, string startingEnclosure, string endingEnclosure)
+        {
+            //Download the HTML code from given URL
+            string fetchedHTML = new WebClient().DownloadString(URL).ToString();
+            //Search for the first occurance of first tag
+            int firstPos = fetchedHTML.IndexOf(startingEnclosure);
+            int secondPos = fetchedHTML.IndexOf(endingEnclosure, firstPos);
+            //Fetch only the text of interest
+            return fetchedHTML.Substring(firstPos + startingEnclosure.Length, secondPos - firstPos - startingEnclosure.Length);
         }
 
         public List<News> NewsList
