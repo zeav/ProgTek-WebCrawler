@@ -17,6 +17,17 @@ namespace ProgTek_WebCrawler
         }
         public void insertNews(News input)
         {
+            OracleCommand oc = con.CreateCommand();
+            System.Data.SqlClient.SqlCommand dataCommand = new System.Data.SqlClient.SqlCommand();
+            oc.CommandText = ("INSERT NYHET (URL, OVERSKRIFT, INGRESS, TIDSPUNKT, KATEGORI, BRODTEKST, BRODTEKSTHTML) VALUES (@input.Link, @input.Title, @input.Description, @input.Date, @input.Category, @input.Text, @input.???)");
+            dataCommand.Parameters.AddWithValue("@input.Link", input.Link);
+            dataCommand.Parameters.AddWithValue("@input.Title", input.Title);
+            dataCommand.Parameters.AddWithValue("@input.Description", input.Description);
+            dataCommand.Parameters.AddWithValue("@input.Date", input.Date);
+            dataCommand.Parameters.AddWithValue("@input.Category", input.Category);
+            dataCommand.Parameters.AddWithValue("@input.Text", input.Text);
+ //brodtekst html?  dataCommand.Parameters.AddWithValue("@");
+            dataCommand.ExecuteNonQuery();
 
         }
         public void testConnection()
