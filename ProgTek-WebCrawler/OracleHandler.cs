@@ -15,6 +15,41 @@ namespace ProgTek_WebCrawler
             con = new OracleConnection("Data Source=( DESCRIPTION = ( ADDRESS_LIST = ( ADDRESS = ( PROTOCOL = TCP )( HOST = sitas.hin.no )( PORT = 1521 ) ) )( CONNECT_DATA = ( SERVER = DEDICATED )( SERVICE_NAME = orcl.sitas.hin.no ) ) ); User Id= M42; Password = marvin;");
             con.Open();
         }
+        public List<Nyhetsbyraa> getNyhetsbyraa()
+        {
+            if (con.State.ToString() != "Open")
+            {
+                con.Open();
+            }
+
+            List<Nyhetsbyraa> byraaList = new List<Nyhetsbyraa>();
+
+            OracleCommand oc = con.CreateCommand();
+            oc.CommandText = "select id, navn, sokefrekvens, type, url, KANVISEBRODTEKST, brodtagstart, brodtagstop from nyhetsbyraa";
+            OracleDataReader reader = oc.ExecuteReader();
+
+            while (reader.Read())
+            {
+                int id = (Int16)reader[0];
+                string navn = (string)reader[1];
+                int sokefrekvens = 5;
+                if (reader[2] != DBNull.Value)
+                    sokefrekvens = (Int16)reader[2];
+                string brodTagStart = "";
+                if (reader[6] != DBNull.Value)
+                    brodTagStart = (string)reader[6];
+                string brodTagStop = "";
+                if (reader[7] != DBNull.Value)
+                    brodTagStop = (string)reader[7];
+                string kanvisebrodtekst = "Y";
+                if (reader[5] != DBNull.Value)
+                    kanvisebrodtekst = (string)reader[5];
+
+                byraaList.Add(new Nyhetsbyraa(id, sokefrekvens, navn, (string)reader[3], (string)reader[4], brodTagStart, brodTagStop, kanvisebrodtekst));
+            }
+            return byraaList;
+        }
+
         public void insertNews(News input)
         {
             OracleCommand oc = con.CreateCommand();
@@ -26,7 +61,7 @@ namespace ProgTek_WebCrawler
             dataCommand.Parameters.AddWithValue("@input.Date", input.Date);
             dataCommand.Parameters.AddWithValue("@input.Category", input.Category);
             dataCommand.Parameters.AddWithValue("@input.Text", input.Text);
- //brodtekst html?  dataCommand.Parameters.AddWithValue("@");
+            //brodtekst html?  dataCommand.Parameters.AddWithValue("@");
             dataCommand.ExecuteNonQuery();
 
         }

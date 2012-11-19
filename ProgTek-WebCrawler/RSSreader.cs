@@ -14,7 +14,10 @@ namespace ProgTek_WebCrawler
         /// Will download the RSS feed, and then parse it into a list
         /// </summary>
         /// <param name="URL">URL string to RSS feed</param>
-        public RSSreader(string URL)
+        /// <param name="fetchText">Y or N on fetching text</param>
+        /// <param name="brodTagStart">Text Tag Start</param>
+        /// <param name="brodTagStop">Text Tag Stop</param>
+        public RSSreader(string URL, string fetchText, string brodTagStart, string brodTagStop)
         {
             downloadedRSS = new WebClient().DownloadString(URL);
             List<string> itemList = getValuesOfXMLvar(downloadedRSS, "item");
@@ -25,7 +28,11 @@ namespace ProgTek_WebCrawler
                 string date = getFirstValueOfXMLvar(news, "pubDate");
                 string category = getFirstValueOfXMLvar(news, "category");
                 string link = getFirstValueOfXMLvar(news, "link");
-                string text = MainTextFetcher(link, "<!-- Article text -->", "<!-- End of \"artikkel_felt\" -->");
+                string text = "";
+                if (fetchText.ToUpper() == "Y")
+                {
+                    text = MainTextFetcher(link, brodTagStart, brodTagStop);
+                }
                 newsList.Add(new News(title, description, date, category, link, text));
             }
         }
@@ -63,6 +70,13 @@ namespace ProgTek_WebCrawler
             return inputString.Substring(varStart + (XMLvar.Length + 2), varEnd - varStart - (XMLvar.Length + 2));
         }
 
+        /// <summary>
+        /// Fetches text from a website and gets only the text between the two Tags.
+        /// </summary>
+        /// <param name="URL">Website URL (with HTTP)</param>
+        /// <param name="startingEnclosure">Starting Tag</param>
+        /// <param name="endingEnclosure">Stop Tag</param>
+        /// <returns></returns>
         public string MainTextFetcher(string URL, string startingEnclosure, string endingEnclosure)
         {
             //Download the HTML code from given URL
@@ -74,6 +88,9 @@ namespace ProgTek_WebCrawler
             return fetchedHTML.Substring(firstPos + startingEnclosure.Length, secondPos - firstPos - startingEnclosure.Length);
         }
 
+        /// <summary>
+        /// Returns the news fetched in a List
+        /// </summary>
         public List<News> NewsList
         {
             get { return newsList; }

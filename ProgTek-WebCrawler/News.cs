@@ -43,7 +43,7 @@ namespace ProgTek_WebCrawler
 
         public override string ToString()
         {
-            return ("-News-\r\n") + ("Title: " + Title + "\r\n") + ("Description: " + Description + "\r\n") + ("Date: " + Date + "\r\n") + ("Category: " + Category + "\r\n") + ("Link: " + Link) + ("Text: " + Text);
+            return ("-News-\r\n") + ("Title: " + Title + "\r\n") + ("Description: " + Description + "\r\n") + ("Date: " + Date + "\r\n") + ("Category: " + Category + "\r\n") + ("Link: " + Link + "\r\n") + ("Text: " + Text);
         }
 
         private string HTMLTagCleaner(string input)

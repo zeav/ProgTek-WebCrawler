@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="News.cs" />
+    <Compile Include="Nyhetsbyraa.cs" />
     <Compile Include="OracleHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

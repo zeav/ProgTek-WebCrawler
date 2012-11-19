@@ -9,16 +9,27 @@ namespace ProgTek_WebCrawler
     {
         static void Main(string[] args)
         {
-            RSSreader reader = new RSSreader("http://www.vg.no/rss/create.php");
-            List<News> list = reader.NewsList;
-            foreach (News news in list)
+            //Test rutine
+            OracleHandler OH = new OracleHandler();
+            foreach (Nyhetsbyraa NB in OH.getNyhetsbyraa())
             {
-                Console.WriteLine(news.ToString());
-                Console.WriteLine();
+                foreach (News news in new RSSreader(NB.URL, NB.KanViseBrodtekst, NB.BrodTagStart, NB.BrodTagStop).NewsList)
+                {
+                    Console.WriteLine(news.ToString());
+                    Console.WriteLine();
+                }
             }
 
-            OracleHandler test = new OracleHandler();
-            test.testConnection();
+            //End of test rutine
+            //RSSreader reader = new RSSreader("http://www.vg.no/rss/create.php", 'Y', "<!-- Article text -->", "<!-- End of \"artikkel_felt\" -->");
+            //foreach (News news in reader.NewsList)
+            //{
+            //    Console.WriteLine(news.ToString());
+            //    Console.WriteLine();
+            //}
+
+            //OracleHandler test = new OracleHandler();
+            //test.testConnection();
 
             Console.ReadKey();
         }
