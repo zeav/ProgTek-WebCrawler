@@ -41,7 +41,7 @@ namespace ProgTek_WebCrawler
                 string brodTagStop = "";
                 if (reader[7] != DBNull.Value)
                     brodTagStop = (string)reader[7];
-                string kanvisebrodtekst = "Y";
+                string kanvisebrodtekst = "N";
                 if (reader[5] != DBNull.Value)
                     kanvisebrodtekst = (string)reader[5];
 
@@ -52,19 +52,38 @@ namespace ProgTek_WebCrawler
 
         public void insertNews(News input)
         {
+            if (con.State.ToString() != "Open")
+            {
+                con.Open();
+            }
             OracleCommand oc = con.CreateCommand();
             System.Data.SqlClient.SqlCommand dataCommand = new System.Data.SqlClient.SqlCommand();
-            oc.CommandText = ("INSERT NYHET (URL, OVERSKRIFT, INGRESS, TIDSPUNKT, KATEGORI, BRODTEKST, BRODTEKSTHTML) VALUES (@input.Link, @input.Title, @input.Description, @input.Date, @input.Category, @input.Text, @input.???)");
+            oc.CommandText = ("INSERT NYHET (URL, OVERSKRIFT, INGRESS, TIDSPUNKT, KATEGORI, BRODTEKST, BRODTEKSTHTML) VALUES (@input.Link, @input.Title, @input.Description, @input.Date, @input.Category, @input.Text, @input.html)");
             dataCommand.Parameters.AddWithValue("@input.Link", input.Link);
             dataCommand.Parameters.AddWithValue("@input.Title", input.Title);
             dataCommand.Parameters.AddWithValue("@input.Description", input.Description);
             dataCommand.Parameters.AddWithValue("@input.Date", input.Date);
             dataCommand.Parameters.AddWithValue("@input.Category", input.Category);
             dataCommand.Parameters.AddWithValue("@input.Text", input.Text);
+            dataCommand.Parameters.AddWithValue("@input.html", input.HTML);
             //brodtekst html?  dataCommand.Parameters.AddWithValue("@");
             dataCommand.ExecuteNonQuery();
 
         }
+
+        public string getToDateFromRFC1123(string input)
+        {
+            //Wed, 21 Nov 2012 04:13:51 GMT
+            string day = input.Substring(5, 2);
+            string month = input.Substring(8, 3);
+            string year = input.Substring(12, 4);
+            string hour = input.Substring(17, 2);
+            string minute = input.Substring(20, 2);
+            string second = input.Substring(23, 2);
+
+            return "to_date('"+day+month+year+hour+minute+second+"', 'ddmmyyyyHH24MISS')";
+        }
+
         public void testConnection()
         {
             if (con.State.ToString() != "Open")

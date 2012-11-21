@@ -33,13 +33,34 @@ namespace ProgTek_WebCrawler
             this.html = Text;
             this.text = HTMLTagCleaner(Text);
         }
-
+        /// <summary>
+        /// Title of the News
+        /// </summary>
         public string Title { get { return title; } }
+        /// <summary>
+        /// Summary of the News
+        /// </summary>
         public string Description { get { return description; } }
+        /// <summary>
+        /// Date published
+        /// </summary>
         public string Date { get { return date; } }
+        /// <summary>
+        /// Category of the News
+        /// </summary>
         public string Category { get { return category; } }
+        /// <summary>
+        /// The direct URL of the News
+        /// </summary>
         public string Link { get { return link; } }
+        /// <summary>
+        /// The text without HTML tags
+        /// </summary>
         public string Text { get { return text; } }
+        /// <summary>
+        /// The text with HTML tags
+        /// </summary>
+        public string HTML { get { return html; } }
 
         public override string ToString()
         {

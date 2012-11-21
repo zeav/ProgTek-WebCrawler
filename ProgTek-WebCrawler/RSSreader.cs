@@ -66,6 +66,7 @@ namespace ProgTek_WebCrawler
         private string getFirstValueOfXMLvar(string inputString, string XMLvar)
         {
             int varStart = inputString.IndexOf("<" + XMLvar + ">");
+            if (varStart < 0) { Console.WriteLine("Item not found: "+XMLvar); return ""; }
             int varEnd = inputString.IndexOf(@"</" + XMLvar + ">");
             return inputString.Substring(varStart + (XMLvar.Length + 2), varEnd - varStart - (XMLvar.Length + 2));
         }
@@ -83,7 +84,9 @@ namespace ProgTek_WebCrawler
             string fetchedHTML = new WebClient().DownloadString(URL).ToString();
             //Search for the first occurance of first tag
             int firstPos = fetchedHTML.IndexOf(startingEnclosure);
+            if (firstPos < 0) { Console.WriteLine("Main text fetch failed (1)."); return ""; }
             int secondPos = fetchedHTML.IndexOf(endingEnclosure, firstPos);
+            if (secondPos < 0) { Console.WriteLine("Main text fetch failed (2)."); return ""; }
             //Fetch only the text of interest
             return fetchedHTML.Substring(firstPos + startingEnclosure.Length, secondPos - firstPos - startingEnclosure.Length);
         }

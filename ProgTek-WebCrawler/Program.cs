@@ -15,7 +15,7 @@ namespace ProgTek_WebCrawler
             {
                 foreach (News news in new RSSreader(NB.URL, NB.KanViseBrodtekst, NB.BrodTagStart, NB.BrodTagStop).NewsList)
                 {
-                    Console.WriteLine(news.ToString());
+                    Console.WriteLine(news.Date);
                     Console.WriteLine();
                 }
             }
