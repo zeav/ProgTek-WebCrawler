@@ -81,7 +81,7 @@ namespace ProgTek_WebCrawler
             string minute = input.Substring(20, 2);
             string second = input.Substring(23, 2);
 
-            return "to_date('"+day+month+year+hour+minute+second+"', 'ddmmyyyyHH24MISS')";
+            return "to_date('"+day+month.ToUpper()+year+hour+minute+second+"', 'ddmmyyyyHH24MISS')";
         }
 
         public void testConnection()
