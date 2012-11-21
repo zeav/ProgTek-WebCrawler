@@ -14,13 +14,13 @@ namespace ProgTek_WebCrawler
         public Nyhetsbyraa(int Id, int Sokefrekvens, string Navn, string Type, string URL, string BrodTagStart, string BrodTagStop, string KanViseBrodtekst)
         {
             //Integers
-            this.id = Id;
+            this.id = Id; 
             this.sokefrekvens = Sokefrekvens;
             //Strings
             this.navn = Navn;
             this.type = Type;
             this.url = URL;
-            this.brodTagStart = BrodTagStart;
+            this.brodTagStart = BrodTagStart; 
             this.brodTagStop = BrodTagStop;
             //Bool
             this.kanViseBrodtekst = KanViseBrodtekst;

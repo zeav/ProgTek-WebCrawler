@@ -15,8 +15,9 @@ namespace ProgTek_WebCrawler
             {
                 foreach (News news in new RSSreader(NB.URL, NB.KanViseBrodtekst, NB.BrodTagStart, NB.BrodTagStop).NewsList)
                 {
+                    OH.insertNews(news, NB.Id);
                     Console.WriteLine(news.Date);
-                    Console.WriteLine();
+                    Console.WriteLine(); 
                 }
             }
 
@@ -28,7 +29,7 @@ namespace ProgTek_WebCrawler
             //    Console.WriteLine();
             //}
 
-            //OracleHandler test = new OracleHandler();
+            //OracleHandler test = new OracleHandler(); 
             //test.testConnection();
 
             Console.ReadKey();

@@ -11,8 +11,8 @@ namespace ProgTek_WebCrawler
         private string downloadedRSS;
         private List<News> newsList = new List<News>();
         /// <summary>
-        /// Will download the RSS feed, and then parse it into a list
-        /// </summary>
+        /// Will download the RSS feed, and then parse it into a list 
+        /// </summary> 
         /// <param name="URL">URL string to RSS feed</param>
         /// <param name="fetchText">Y or N on fetching text</param>
         /// <param name="brodTagStart">Text Tag Start</param>

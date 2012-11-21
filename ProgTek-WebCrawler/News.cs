@@ -10,7 +10,7 @@ namespace ProgTek_WebCrawler
         private string title;
         private string link;
         private string description;
-        private string date;
+        private DateTime date;
         private string category;
         private string text;
         private string html;
@@ -27,7 +27,7 @@ namespace ProgTek_WebCrawler
         {
             this.title = Title;
             this.description = Description;
-            this.date = Date;
+            this.date = RFC1123toDate(Date);
             this.category = Category;
             this.link = Link;
             this.html = Text;
@@ -44,7 +44,7 @@ namespace ProgTek_WebCrawler
         /// <summary>
         /// Date published
         /// </summary>
-        public string Date { get { return date; } }
+        public DateTime Date { get { return date; } }
         /// <summary>
         /// Category of the News
         /// </summary>
@@ -81,6 +81,39 @@ namespace ProgTek_WebCrawler
                 //Now split it up, and merge them together without the <>
                 input = input.Substring(0, firstPos) + input.Substring(secondPos);
             }
+        }
+        /// <summary>
+        /// Turns RFC1123 date to DateTime C# object. Example RFC1123: Wed, 21 Nov 2012 04:13:51 GMT
+        /// </summary>
+        /// <param name="input">RFC1123 Date format</param>
+        /// <returns>DateTime object</returns>
+        private DateTime RFC1123toDate(string input)
+        {
+            //Wed, 21 Nov 2012 04:13:51 GMT
+            int day     = int.Parse(input.Substring(5, 2));
+            string monthString = input.Substring(8, 3);
+            int month = 0;
+            switch(monthString.ToLower())
+            {
+                case "jan": month=1; break;
+                case "feb": month=2; break;
+                case "mar": month=3; break; 
+                case "apr": month=4; break;
+                case "may": month=5; break;
+                case "jun": month=6; break;
+                case "jul": month=7; break;
+                case "aug": month=8; break; 
+                case "sep": month=9; break;
+                case "oct": month=10; break;
+                case "nov": month=11; break;
+                case "des": month=12; break;
+            }
+            int year    = int.Parse(input.Substring(12, 4));
+            int hour    = int.Parse(input.Substring(17, 2));
+            int minute  = int.Parse(input.Substring(20, 2));
+            int second  = int.Parse(input.Substring(23, 2));
+
+            return new DateTime(year, month, day, hour, minute, second);
         }
     }
 }
